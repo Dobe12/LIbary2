@@ -25,8 +25,11 @@ namespace LibaryTask.Linq
         {
             List<IEnumerable<XElement>> elementsFromXml = XmlGetData(this._path, this._libary);
 
-            _libary.addDataToLibary(elementsFromXml);
-            _libary.showBooksByCondition();
+            _libary.AddDataToLibary(elementsFromXml);
+
+            ComandList comand = new ComandList(_libary);
+            comand.MenuStart();
+
         }
         static bool isExists(string path)
         {
