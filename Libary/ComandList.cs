@@ -8,6 +8,7 @@ namespace LibaryTask
     class ComandList
     {
         public Libary libary { get; set; }
+        public List<Tuple<string,Action>>;
 
         public ComandList(Libary libary)
         {
