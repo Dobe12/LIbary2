@@ -88,12 +88,10 @@ namespace LibraryTask.Models
         {
             IEnumerable<Book> booksById = this.Readers.Where(r => r.Id == id).Select(r => r.HoldedBooks).FirstOrDefault();
             ShowAllBook(booksById);
-
-
         }
         public void DrunkStyle()
         {
-            Console.WriteLine("Пьяные читатили:");
+            Console.WriteLine("Пьяные читатели:");
             foreach(Reader reader in Readers)
             {
                 Console.WriteLine(reader.FirstName.Drunk() + " " + reader.LastName.Drunk());
