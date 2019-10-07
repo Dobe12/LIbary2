@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
-using LibaryTask;
 using LibraryTask.Models;
 
 namespace LibraryTask.Linq
@@ -11,13 +10,13 @@ namespace LibraryTask.Linq
     public class XmlHandler
     {
         public string _path;
-        Library _library { get; set; }
+        Libary _library { get; set; }
 
 
         public XmlHandler(string path)
         {
             _path = path;
-            _library = new Library();
+            _library = new Libary();
 
         }
 
@@ -26,10 +25,7 @@ namespace LibraryTask.Linq
         {
             List<IEnumerable<XElement>> elementsFromXml = XmlGetData(this._path, this._library);
 
-
-            _library.AddDataToLibrary(elementsFromXml);
-            _library.ShowBooksByCondition();
-
+            _library.AddDataToLibary(elementsFromXml);
 
             ComandList comand = new ComandList(_library);
             comand.MenuStart();
@@ -42,7 +38,7 @@ namespace LibraryTask.Linq
 
         
 
-        private static List<IEnumerable<XElement>> XmlGetData(string path, Library libary)
+        private static List<IEnumerable<XElement>> XmlGetData(string path, Libary libary)
         {
             if (!isExists(path))
                 throw new Exception("Неверный путь");
