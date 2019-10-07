@@ -5,6 +5,7 @@ using System.IO;
 using System.Xml.Linq;
 using LibraryTask.Models;
 using LibraryTask.Linq;
+using LibaryTask;
 
 namespace LibraryTask
 {
@@ -12,20 +13,25 @@ namespace LibraryTask
     {
         static void Main(string[] args)
         {
-            string _path = @"Library.xml";
+            try
+            {
+                string _path = @"Library.xml";
 
-            XmlHandler xmlhandler = new XmlHandler(_path);
-            xmlhandler.Start();
+                XmlHandler xmlhandler = new XmlHandler(_path);
 
-            Console.Read();
-        }
+                Library library = new Library();
+                xmlhandler.AddDataToLibrary(library);
 
+                ComandList comand = new ComandList(library);
 
-        
-
-       
-
-        
-      
+                comand.MenuStart();
+            }
+            catch(Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex.Message);
+                Console.ForegroundColor = Console.ForegroundColor;
+            }
+        }      
     }
 }

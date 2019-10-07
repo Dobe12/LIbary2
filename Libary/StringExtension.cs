@@ -9,19 +9,22 @@ namespace LibraryTask
         public static string Drunk(this string str)
         {
             bool flag = false;
+
             string newString = "";
 
             foreach(char symbol in str.ToCharArray())
             {
+
                 if (flag)
                 {
-                    flag = !flag;
                     newString += Char.ToUpper(symbol);
-                } else
+                }
+                else
                 {
-                    flag = !flag;
                     newString += Char.ToLower(symbol);
                 }
+
+                flag = !flag;
             }
 
             return newString;

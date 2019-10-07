@@ -10,49 +10,36 @@ namespace LibraryTask.Linq
 {
     public class XmlHandler
     {
-        public string _path;
-        Library _library { get; set; }
-
+        private string _path;
 
         public XmlHandler(string path)
         {
-            _path = path;
-            _library = new Library();
-
+            if (ifExists(path))
+                _path = path;
         }
-
-
-        public void Start()
+        public void AddDataToLibrary(Library library)
         {
-            List<IEnumerable<XElement>> elementsFromXml = XmlGetData(this._path, this._library);
 
-            _library.AddDataToLibrary(elementsFromXml);
+            Dictionary<string, IEnumerable<XElement>> elementsFromXml = XmlGetData(this._path, library);
 
-            ComandList comand = new ComandList(_library);
-            comand.MenuStart();
-
+            library.AddDataToLibrary(elementsFromXml);
         }
-        static bool isExists(string path)
+        static bool ifExists(string path)
         {
             return File.Exists(path);
         }
-
-        
-
-        private static List<IEnumerable<XElement>> XmlGetData(string path, Library libary)
+    
+        private static Dictionary<string, IEnumerable<XElement>> XmlGetData(string path, Library libary)
         {
-            if (!isExists(path))
-                throw new Exception("Неверный путь");
-
             XDocument xdoc = XDocument.Load(path);
 
-            List<IEnumerable<XElement>> listElements = new List<IEnumerable<XElement>>();
+            Dictionary <string, IEnumerable <XElement>> listElements = new Dictionary<string,  IEnumerable < XElement > > ();
 
             IEnumerable<XElement> booksElements = xdoc.Element("library").Element("books").Elements();
             IEnumerable<XElement> readerElements = xdoc.Element("library").Element("readers").Elements();
 
-            listElements.Add(booksElements);
-            listElements.Add(readerElements);
+            listElements.Add("Books", booksElements);
+            listElements.Add("Readers", readerElements);
 
             return listElements;
         }
