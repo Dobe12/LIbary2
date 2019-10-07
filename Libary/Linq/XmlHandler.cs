@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
-using LibaryTask.Models;
+using LibraryTask.Models;
 
-namespace LibaryTask.Linq
+namespace LibraryTask.Linq
 {
     public class XmlHandler
     {
         public string _path;
-        Libary _libary { get; set; }
+        Libary _library { get; set; }
 
 
         public XmlHandler(string path)
         {
             _path = path;
-            _libary = new Libary();
+            _library = new Libary();
 
         }
 
 
         public void Start()
         {
-            List<IEnumerable<XElement>> elementsFromXml = XmlGetData(this._path, this._libary);
+            List<IEnumerable<XElement>> elementsFromXml = XmlGetData(this._path, this._library);
 
-            _libary.addDataToLibary(elementsFromXml);
-            _libary.showBooksByCondition();
+            _library.addDataToLibary(elementsFromXml);
+            _library.showBooksByCondition();
         }
         static bool isExists(string path)
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibaryTask.Models
+namespace LibraryTask.Models
 {
     public class Reader
     {

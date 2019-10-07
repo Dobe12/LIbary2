@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibaryTask
+namespace LibraryTask
 {
     public static class StringExtension
     {
