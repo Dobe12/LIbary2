@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace LibraryTask.Models
 {
-    public class Libary
+    public class Library
     {
         public List<Book> Books { get; set; } = new List<Book>();
         public List<Reader> Readers { get; set; } = new List<Reader>();
 
 
-        public  void AddDataToLibary(List<IEnumerable<XElement>> list)
+        public  void AddDataToLibrary(List<IEnumerable<XElement>> list)
         {
             foreach (IEnumerable<XElement> item in list)
             {

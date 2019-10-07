@@ -1,4 +1,4 @@
-﻿using LibaryTask.Models;
+﻿using LibraryTask.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,12 +7,12 @@ namespace LibaryTask
 {
     class ComandList
     {
-        public Libary libary { get; set; }
-        public List<Tuple<string,Action>>;
+        public Library library { get; set; }
+        //public List<Tuple<string,Action>>;
 
-        public ComandList(Libary libary)
+        public ComandList(Library library)
         {
-            this.libary = libary;
+            this.library = library;
         }
         public  void MenuStart()
         {
@@ -33,16 +33,16 @@ namespace LibaryTask
                     switch (command)
                     {
                         case 1:
-                            libary.ShowAllBookNames();
+                            library.ShowAllBookNames();
                             break;
                         case 2:
-                            libary.ShowBooksByCondition();
+                            library.ShowBooksByCondition();
                             break;
                         case 3:
-                            libary.ShowBooksById(2);
+                            library.ShowBooksById(2);
                             break;
                         case 4:
-                            libary.DrunkStyle();
+                            library.DrunkStyle();
                             break;
                         case 5:
                             alive = false;
