@@ -10,7 +10,7 @@ namespace LibaryTask
     class ComandList
     {
         public Library library { get; set; }
-        public List<Tuple<string, Action<Library> > > TuplesList;
+        public List<Tuple<string, Action<Library> > > TuplesList = new List<Tuple<string, Action<Library>>>();
         private bool alive;
 
         public ComandList(Library library)
@@ -19,10 +19,10 @@ namespace LibaryTask
             this.alive = true;
             Action<Library> test = ShowAllBookNames;
 
-            this.TuplesList.Add(new Tuple<string, Action<Library>>("1 - Вывести список всех названий книг", ShowAllBookNames));
-            this.TuplesList.Add(new Tuple<string, Action<Library>>("2 - Вывести все книги, изданные между 2017 и 2019 годом", ShowBooksByCondition));
-            this.TuplesList.Add(new Tuple<string, Action<Library>>("3 - Вывести книги, которые взяла Дашкова", ShowBooksById));
-            this.TuplesList.Add(new Tuple<string, Action<Library>>("4 - Получить пьяный список ФИО читателе", DrunkStyle));
+            this.TuplesList.Add(new Tuple<string, Action<Library>>("0 - Вывести список всех названий книг", ShowAllBookNames));
+            this.TuplesList.Add(new Tuple<string, Action<Library>>("1 - Вывести все книги, изданные между 2017 и 2019 годом", ShowBooksByCondition));
+            this.TuplesList.Add(new Tuple<string, Action<Library>>("2 - Вывести книги, которые взяла Дашкова", ShowBooksById));
+            this.TuplesList.Add(new Tuple<string, Action<Library>>("3 - Получить пьяный список ФИО читателе", DrunkStyle));
         }
         public  void MenuStart()
         {
@@ -33,11 +33,8 @@ namespace LibaryTask
                 {
                     Console.WriteLine(tuple.Item1);
                 }
-                Console.WriteLine("1 - Вывести список всех названий книг");
-                Console.WriteLine("2 - Вывести все книги, изданные между 2017 и 2019 годом");
-                Console.WriteLine("3 - Вывести книги, которые взяла Дашкова");
-                Console.WriteLine("4 - Получить пьяный список ФИО читателе");
-                Console.WriteLine("5 - Выход");
+
+                Console.WriteLine("4 - Выход");
 
                 try
                 {
@@ -45,19 +42,20 @@ namespace LibaryTask
 
                     switch (command)
                     {
+
+                        case 0:
+                            TuplesList[0].Item2(library);
+                            break;
                         case 1:
-                            ShowAllBookNames(library);
+                            TuplesList[1].Item2(library);
                             break;
                         case 2:
-                            ShowBooksByCondition(library);
+                            TuplesList[2].Item2(library);
                             break;
                         case 3:
-                            ShowBooksById(library);
+                            TuplesList[3].Item2(library);
                             break;
                         case 4:
-                            DrunkStyle(library);
-                            break;
-                        case 5:
                             this.alive = false;
                             continue;
                     }
