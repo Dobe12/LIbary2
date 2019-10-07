@@ -12,7 +12,7 @@ namespace LibraryTask.Models
         public List<Reader> Readers { get; set; } = new List<Reader>();
 
 
-        public  void addDataToLibary(List<IEnumerable<XElement>> list)
+        public  void AddDataToLibary(List<IEnumerable<XElement>> list)
         {
             foreach (IEnumerable<XElement> item in list)
             {
@@ -30,21 +30,21 @@ namespace LibraryTask.Models
                     }
                     else if (element.Name == "reader")
                     {
-                        List<Book> bookHolded = new List<Book>();
-                        foreach(XElement bookElement in element.Elements("bookHolded"))
+                        List<Book> holdedBooks = new List<Book>();
+                        foreach(XElement bookHoldedElement in element.Elements("holdedBooks"))
                         {
-                            //обработать!
-                           //Convert.ToInt32(bookElement.Attribute("id").Value
-                           // bookHolded.Add(this.Books.Where(b));
-                           // Convert.ToInt32(bookElement.Attribute("id").Value);
-                           // Convert.ToInt32(bookElement.Attribute("id").Value
+                            Console.WriteLine(bookHoldedElement.Value);
+                            int id = Convert.ToInt32(bookHoldedElement.Element("bookHolded").Attribute("id").Value);
+
+                            holdedBooks.Add(Books.Where(b => b.Id == id).FirstOrDefault());
                         }
                         this.Readers.Add(new Reader
                         {
                             FirstName = element.Attribute("FirstName").Value,
                             LastName = element.Attribute("LastName").Value,
                             Id = Convert.ToInt32(element.Attribute("id").Value),
-                            DateOfBirth = Convert.ToDateTime(element.Attribute("DateOfBirth").Value)
+                            DateOfBirth = Convert.ToDateTime(element.Attribute("DateOfBirth").Value),
+                            HoldedBooks = holdedBooks
 
                         });
                     }
@@ -58,7 +58,7 @@ namespace LibraryTask.Models
             }
 
         }
-        public void showAllBookNames()
+        public void ShowAllBookNames()
         {
             foreach(Book book in Books)
             {
@@ -66,7 +66,7 @@ namespace LibraryTask.Models
             }
         }
 
-        private static void showAllBook(IEnumerable<Book> filteredList)
+        private static void ShowAllBook(IEnumerable<Book> filteredList)
         {
             foreach (Book book in filteredList)
             {
@@ -76,19 +76,22 @@ namespace LibraryTask.Models
             }
         }
 
-        public void showBooksByCondition()
+        public void ShowBooksByCondition()
         {
             IEnumerable<Book> filteredList = this.Books.Where(b => b.BookYear >= 2017 && b.BookYear <= 2019);
 
             Console.WriteLine("Книги между 2017-2019 года");
-            showAllBook(filteredList);
+            ShowAllBook(filteredList);
         }
 
-        public void showBooksById(int id)
+        public void ShowBooksById(int id)
         {
-            
+            IEnumerable<Book> booksById = this.Readers.Where(r => r.Id == id).Select(r => r.HoldedBooks).FirstOrDefault();
+            ShowAllBook(booksById);
+
+
         }
-        public void drunkStyle()
+        public void DrunkStyle()
         {
             Console.WriteLine("Пьяные читатили:");
             foreach(Reader reader in Readers)

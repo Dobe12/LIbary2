@@ -10,6 +10,7 @@ namespace LibraryTask
         {
             bool flag = false;
             string newString = "";
+
             foreach(char symbol in str.ToCharArray())
             {
                 if (flag)
