@@ -12,13 +12,10 @@ namespace LibraryTask
     {
         static void Main(string[] args)
         {
-            string _path = @"C:\Users\1\Source\Repos\Libary\Libary\bin\Debug\netcoreapp2.1\Library.xml";
+            string _path = @"Library.xml";
 
             XmlHandler xmlhandler = new XmlHandler(_path);
             xmlhandler.Start();
-
-            Console.WriteLine("wfwefwef".Drunk());
-
 
             Console.Read();
         }
