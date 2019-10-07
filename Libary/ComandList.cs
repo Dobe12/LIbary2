@@ -12,28 +12,17 @@ namespace LibaryTask
     public class ComandList
     {
         public Library library { get; set; }
-<<<<<<< HEAD
         public List<MenuItem> MenuList = new List<MenuItem> ();
-=======
-        public List<Tuple<string, Action<Library> > > TuplesList = new List<Tuple<string, Action<Library>>>();
->>>>>>> done
         private bool alive;
         public ComandList(Library library)
         {
             this.library = library;
             this.alive = true;
 
-<<<<<<< HEAD
             this.MenuList.Add(new MenuItem { Description = "1 - Вывести список всех названий книг", Execute = ShowAllBookNames });
             this.MenuList.Add(new MenuItem { Description = "2 - Вывести все книги, изданные между 2017 и 2019 годом", Execute = ShowBooksByCondition });
             this.MenuList.Add(new MenuItem { Description = "3 - Вывести книги, которые взяла Дашкова", Execute = ShowBooksById });
             this.MenuList.Add(new MenuItem { Description = "4 - Получить пьяный список ФИО читателе", Execute = DrunkStyle });
-=======
-            this.TuplesList.Add(new Tuple<string, Action<Library>>("0 - Вывести список всех названий книг", ShowAllBookNames));
-            this.TuplesList.Add(new Tuple<string, Action<Library>>("1 - Вывести все книги, изданные между 2017 и 2019 годом", ShowBooksByCondition));
-            this.TuplesList.Add(new Tuple<string, Action<Library>>("2 - Вывести книги, которые взяла Дашкова", ShowBooksById));
-            this.TuplesList.Add(new Tuple<string, Action<Library>>("3 - Получить пьяный список ФИО читателе", DrunkStyle));
->>>>>>> done
         }
         public void MenuStart()
         {
@@ -43,41 +32,10 @@ namespace LibaryTask
                 {
                     Console.WriteLine(item.Description);
                 }
-<<<<<<< HEAD
-=======
-
-                Console.WriteLine("4 - Выход");
->>>>>>> done
-
                 Console.WriteLine("other key - Выход");
 
-<<<<<<< HEAD
                 int command = Convert.ToInt32(Console.ReadLine());
                 if (command < 0 || command > MenuList.Count)
-=======
-                    switch (command)
-                    {
-
-                        case 0:
-                            TuplesList[0].Item2(library);
-                            break;
-                        case 1:
-                            TuplesList[1].Item2(library);
-                            break;
-                        case 2:
-                            TuplesList[2].Item2(library);
-                            break;
-                        case 3:
-                            TuplesList[3].Item2(library);
-                            break;
-                        case 4:
-                            this.alive = false;
-                            continue;
-                    }
-
-                }
-                catch (Exception ex)
->>>>>>> done
                 {
                     this.alive = false;
                     continue;
@@ -98,23 +56,16 @@ namespace LibaryTask
         }
         static void ShowAllBookNames(Library library)
         {
-
             library.Books.ForEach(book => Console.WriteLine(book.BookName));
-
-            foreach (Book book in library.Books)
-            {
-                library.Books.ForEach(x => { Console.WriteLine(x.BookName); });
-
-                Console.WriteLine(book.BookName);
-            }
-
         }
 
         static void ShowBooksByCondition(Library library)
         {
-            IEnumerable<Book> filteredList = library.Books.Where(b => b.BookYear >= 2017 && b.BookYear <= 2019);
+            int rightYear = 2017;
+            int leftYear = 2019;
+            IEnumerable<Book> filteredList = library.Books.Where(b => b.BookYear >= rightYear && b.BookYear <= leftYear);
 
-            Console.WriteLine("Книги между 2017-2019 года");
+            Console.WriteLine($"Книги между {leftYear}-{leftYear} года");
             ShowAllBook(filteredList);
         }
 
