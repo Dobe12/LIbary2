@@ -23,7 +23,6 @@ namespace LibraryTask
                 xmlhandler.AddDataToLibrary(library);
 
                 ComandList comand = new ComandList(library);
-
                 comand.MenuStart();
             }
             catch(Exception ex)

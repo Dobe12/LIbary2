@@ -8,6 +8,6 @@ namespace LibaryTask.Menu
     public class MenuItem
     {
         public string Description { get; set; }
-        public Action<Library> Execute { get; set; }
+        public Action Execute { get; set; }
     }
 }
